@@ -2,3 +2,12 @@
 - Is there a difference in the flow of execution from when the code was in the setTimeout function?
 - Is the flow of execution in both these examples different from the flow of execution with the examples using the fetch() API, which also returns a promise? 
 - If yes, explain the code execution difference. Add your explanation to this file.
+
+Yes, there is a difference in the flow of execution. With the setTimeout function, the function prints out "returning from sum" 
+before we see the array being summed. We can see that this represents asynchronous behavior. However, when the function is removed,
+we return from the sum after the array had finished adding. This represents synchronous behavior.
+
+The code with the setTimeout function is similar to the fetch() API call in that they both operate asynchronously. Howevever, the order
+of execution of which the callbacks are executed in fetch() would happen sooner than when the setTimeout function is called. By extracting
+the setTimeout, there is a major difference between the the sum function and a fetch that returns a promise. The new sum function will not before
+asynchronous, and instead will execute in the order that the code has been written.

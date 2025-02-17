@@ -9,28 +9,35 @@ const aliceTiming1: KeyframeEffectOptions = {
   fill: 'forwards'
 };
 
-const alice10 = document.querySelector<HTMLElement>("#alice1");
-const alice20 = document.querySelector<HTMLElement>("#alice2");
-const alice30 = document.querySelector<HTMLElement>("#alice3");
+const alice1: HTMLElement | null = document.querySelector("#alice1");
+const alice2: HTMLElement | null = document.querySelector("#alice2");
+const alice3: HTMLElement | null = document.querySelector("#alice3");
 
-if(alice10 && alice20 && alice30) {
-  // Promise chain  
-  alice10.animate(aliceTumbling1, aliceTiming1).finished  
-    .then(() => {
-        return alice20
-                .animate(aliceTumbling1, aliceTiming1)
-                .finished;     
-    })
-    .then(() => {
-      return alice30
-              .animate(aliceTumbling1, aliceTiming1)
-              .finished;
-    })
-    .catch((err) => alert(`Error when promising ... ${err.message}`));
+async function animate(): Promise<void> {
+  try {
+    if (alice1) {
+      await alice1.animate(aliceTumbling1, aliceTiming1).finished;
+    } else {
+      console.warn("#alice1 not found");
+    }
+
+    if (alice2) {
+      await alice2.animate(aliceTumbling1, aliceTiming1).finished;
+    } else {
+      console.warn("#alice2 not found");
+    }
+
+    if (alice3) {
+      await alice3.animate(aliceTumbling1, aliceTiming1).finished;
+    } else {
+      console.warn("#alice3 not found");
+    }
+  } catch (err) {
+    console.warn("#alice not found");
+  }
 }
-else{
-  console.warn("#alice not found");
-}
+
+window.addEventListener("load", animate);
 
 // alice10
 //     .animate(aliceTumbling1, aliceTiming1)
